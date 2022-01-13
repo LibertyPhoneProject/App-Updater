@@ -505,7 +505,7 @@ public class UpdatesActivity extends UpdatesListActivity {
                 .setOnDismissListener(dialogInterface -> {
                     prefs.edit()
                             .putInt(Constants.PREF_CHANNEL,
-                                    autoCheckInterval.getSelectedItemPosition())
+                                    channel.getSelectedItemPosition())
                             .putInt(Constants.PREF_AUTO_UPDATES_CHECK_INTERVAL,
                                     autoCheckInterval.getSelectedItemPosition())
                             .putBoolean(Constants.PREF_AUTO_DELETE_UPDATES,
