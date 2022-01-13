@@ -453,8 +453,8 @@ public class UpdatesActivity extends UpdatesListActivity {
 
     private void showPreferencesDialog() {
         View view = LayoutInflater.from(this).inflate(R.layout.preferences_dialog, null);
-        Spinner autoCheckInterval =
-                view.findViewById(R.id.preferences_auto_updates_check_interval);
+        Spinner channel = view.findViewById(R.id.preferences_channel);
+        Spinner autoCheckInterval = view.findViewById(R.id.preferences_auto_updates_check_interval);
         Switch autoDelete = view.findViewById(R.id.preferences_auto_delete_updates);
         Switch dataWarning = view.findViewById(R.id.preferences_mobile_data_warning);
         Switch abPerfMode = view.findViewById(R.id.preferences_ab_perf_mode);
@@ -465,6 +465,7 @@ public class UpdatesActivity extends UpdatesListActivity {
         }
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        channel.setSelection(Utils.getUpdateChannelSetting(this));
         autoCheckInterval.setSelection(Utils.getUpdateCheckSetting(this));
         autoDelete.setChecked(prefs.getBoolean(Constants.PREF_AUTO_DELETE_UPDATES, false));
         dataWarning.setChecked(prefs.getBoolean(Constants.PREF_MOBILE_DATA_WARNING, true));
@@ -503,6 +504,8 @@ public class UpdatesActivity extends UpdatesListActivity {
                 .setView(view)
                 .setOnDismissListener(dialogInterface -> {
                     prefs.edit()
+                            .putInt(Constants.PREF_CHANNEL,
+                                    autoCheckInterval.getSelectedItemPosition())
                             .putInt(Constants.PREF_AUTO_UPDATES_CHECK_INTERVAL,
                                     autoCheckInterval.getSelectedItemPosition())
                             .putBoolean(Constants.PREF_AUTO_DELETE_UPDATES,

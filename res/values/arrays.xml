@@ -21,4 +21,8 @@
         <item>@string/menu_auto_updates_check_interval_weekly</item>
         <item>@string/menu_auto_updates_check_interval_monthly</item>
     </string-array>
+    <string-array name="menu_channel_entries" translatable="false">
+        <item>@string/menu_channel_beta</item>
+        <item>@string/menu_channel_stable</item>
+    </string-array>
 </resources>

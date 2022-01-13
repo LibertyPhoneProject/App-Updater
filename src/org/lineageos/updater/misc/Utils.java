@@ -161,6 +161,10 @@ public class Utils {
             serverUrl = context.getString(R.string.updater_server_url);
         }
 
+        if (Utils.getUpdateChannelSetting(context) == Constants.CHANNEL_BETA) {
+            serverUrl = serverUrl.replace("https://", "https://beta.");
+        }
+
         return serverUrl.replace("{device}", device)
                 .replace("{type}", type)
                 .replace("{incr}", incrementalVersion);
@@ -378,6 +382,12 @@ public class Utils {
     public static boolean isEncrypted(Context context, File file) {
         StorageManager sm = (StorageManager) context.getSystemService(Context.STORAGE_SERVICE);
         return sm.isEncrypted(file);
+    }
+
+    public static int getUpdateChannelSetting(Context context) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return preferences.getInt(Constants.PREF_CHANNEL,
+                Constants.CHANNEL_STABLE);
     }
 
     public static int getUpdateCheckSetting(Context context) {
