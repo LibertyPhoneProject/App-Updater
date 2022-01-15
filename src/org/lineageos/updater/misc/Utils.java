@@ -162,7 +162,7 @@ public class Utils {
         }
 
         if (Utils.getUpdateChannelSetting(context) == Constants.CHANNEL_BETA) {
-            serverUrl = serverUrl.replace("https://", "https://beta.");
+            serverUrl = serverUrl.replace("https://", "https://beta-");
         }
 
         return serverUrl.replace("{device}", device)
