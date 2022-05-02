@@ -443,6 +443,7 @@ public class UpdatesActivity extends UpdatesListActivity {
     @SuppressLint("ClickableViewAccessibility")
     private void showPreferencesDialog() {
         View view = LayoutInflater.from(this).inflate(R.layout.preferences_dialog, null);
+        Spinner channel = view.findViewById(R.id.preferences_channel);
         Spinner autoCheckInterval = view.findViewById(R.id.preferences_auto_updates_check_interval);
         SwitchCompat autoDelete = view.findViewById(R.id.preferences_auto_delete_updates);
         SwitchCompat dataWarning = view.findViewById(R.id.preferences_mobile_data_warning);
@@ -454,10 +455,11 @@ public class UpdatesActivity extends UpdatesListActivity {
         }
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        channel.setSelection(Utils.getUpdateChannelSetting(this));
         autoCheckInterval.setSelection(Utils.getUpdateCheckSetting(this));
-        autoDelete.setChecked(prefs.getBoolean(Constants.PREF_AUTO_DELETE_UPDATES, false));
+        autoDelete.setChecked(prefs.getBoolean(Constants.PREF_AUTO_DELETE_UPDATES, true));
         dataWarning.setChecked(prefs.getBoolean(Constants.PREF_MOBILE_DATA_WARNING, true));
-        abPerfMode.setChecked(prefs.getBoolean(Constants.PREF_AB_PERF_MODE, false));
+        abPerfMode.setChecked(prefs.getBoolean(Constants.PREF_AB_PERF_MODE, true));
 
         if (getResources().getBoolean(R.bool.config_hideRecoveryUpdate)) {
             // Hide the update feature if explicitly requested.
@@ -492,6 +494,8 @@ public class UpdatesActivity extends UpdatesListActivity {
                 .setView(view)
                 .setOnDismissListener(dialogInterface -> {
                     prefs.edit()
+                            .putInt(Constants.PREF_CHANNEL,
+                                    channel.getSelectedItemPosition())
                             .putInt(Constants.PREF_AUTO_UPDATES_CHECK_INTERVAL,
                                     autoCheckInterval.getSelectedItemPosition())
                             .putBoolean(Constants.PREF_AUTO_DELETE_UPDATES, autoDelete.isChecked())

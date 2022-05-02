@@ -17,6 +17,28 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:text="@string/menu_channel"
+            android:textColor="@color/inverted"
+            android:textSize="16sp" />
+
+        <Spinner
+            android:id="@+id/preferences_channel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:entries="@array/menu_channel_entries" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="@string/menu_auto_updates_check"
             android:textColor="@color/inverted"
             android:textSize="16sp" />
